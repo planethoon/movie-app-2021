@@ -1,18 +1,24 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from "react";
+import PropTypes from "prop-types";
 
-
-
-
-export default function Movies({id, year, title, summary, poster}){
-
-
-
+export default function Movies({ id, year, title, summary, poster, genres }) {
   return (
-    <div>
-      <h5>{title}</h5>
+    <div className="movie">
+      <img src={poster} alt={title} title={title} />
+      <div className="movie__data">
+        <h3 className="movie__title">{title}</h3>
+        <h5 className="movie__year">{year}</h5>
+        <ul className="genres">
+          {genres.map((gerne, idx) => (
+            <li key={idx} className="genres__genre">
+              {gerne}
+            </li>
+          ))}
+        </ul>
+        <p className="movie__summary">{summary}</p>
+      </div>
     </div>
-  )
+  );
 }
 
 Movies.propTypes = {
@@ -21,4 +27,5 @@ Movies.propTypes = {
   title: PropTypes.string.isRequired,
   summary: PropTypes.string.isRequired,
   poster: PropTypes.string.isRequired,
-}
+  genres: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
